@@ -1,5 +1,6 @@
 <?php
 
+namespace app\engine;
 
 class Autoload
 {
@@ -7,7 +8,7 @@ class Autoload
     public function loadClass($className) {
 
         $filename = str_replace(['app\\','\\'], ['','/'] , "{$className}.php");
-        $filename = dirname(__DIR__) . "/$filename";
+        $filename = DIR_ROOT . "/$filename";
 
             if (file_exists($filename)){
                 include $filename;
