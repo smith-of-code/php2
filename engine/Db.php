@@ -22,11 +22,11 @@ class Db
 
     private function getConnection(){
         if (is_null($this->connection)){
-            $this->connection =new \PDO($this->prepareDSNstring(),
+            $this->connection = new PDO($this->prepareDSNstring(),
                 $this->config['login'],
                 $this->config['password']
             );
-            $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         }
         return $this->connection;
     }
@@ -36,14 +36,12 @@ class Db
     // $params = ["id" => 1]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
-
         $pdoStatement->execute($params);
         return $pdoStatement;
+
+
     }
 
-    private function execute($sql,$params){
-        return $this->query($sql, $params);
-    }
     private function prepareDSNstring(){
         return sprintf("%s:host=%s;dbname=%s;charset=%s",
             $this->config['driver'],
@@ -63,6 +61,11 @@ class Db
     }
 
 
+    public function execute($sql,$params){
+        $this->query($sql, $params);
+        return true;
+    }
+
     public function queryOne($sql,$params = [])
     {
         return $this->queryAll($sql,$params)[0];
@@ -74,9 +77,8 @@ class Db
 
     public function queryClass($sql, $params, $class){
         $pdoStatement = $this->query($sql,$params);
-        $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
-
-        return $pdoStatement;
+        $pdoStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $class);
+        return $pdoStatement->fetch();
     }
 
 

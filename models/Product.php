@@ -4,7 +4,7 @@ namespace app\models;
 
 use app\engine\Db;
 
-class Product extends Model {
+class Product extends DbModel {
     public $id;
     public $name;
     public $short_desc;
@@ -13,7 +13,9 @@ class Product extends Model {
     public $category;
     public $price;
 
-    public function __construct($id = null,
+
+
+    public function __construct(
                                 $name = null,
                                 $short_desc = null,
                                 $full_desc = null,
@@ -21,8 +23,6 @@ class Product extends Model {
                                 $category = null,
                                 $price = null)
     {
-        parent::__construct();
-        $this->id = $id;
         $this->name = $name;
         $this->short_desc = $short_desc;
         $this->full_desc = $full_desc;
@@ -32,7 +32,7 @@ class Product extends Model {
     }
 
 
-    public function getTableName()
+    public static function getTableName()
     {
         return 'products';
     }
