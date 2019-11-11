@@ -8,6 +8,12 @@ class Cart extends DbModel {
     public $product_id;
     public $count;
 
+    public $props = [
+        'session_id'=> false,
+        'product_id'=> false,
+        'count'=> false
+    ];
+
     public function __construct($session_id = null, $product_id = null, $count = null)
     {
         $this->session_id = $session_id;
