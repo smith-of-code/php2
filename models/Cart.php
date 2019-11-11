@@ -2,23 +2,21 @@
 
 namespace app\models;
 
-class Cart extends Model {
+class Cart extends DbModel {
     public $id;
     public $session_id;
     public $product_id;
     public $count;
 
-    public function __construct($id = null, $session_id = null, $product_id = null, $count = null)
+    public function __construct($session_id = null, $product_id = null, $count = null)
     {
-        parent::__construct();
-        $this->id = $id;
         $this->session_id = $session_id;
         $this->product_id = $product_id;
         $this->count = $count;
     }
 
 
-    public function getTableName()
+    public static function getTableName()
     {
      return 'cart';
     }
