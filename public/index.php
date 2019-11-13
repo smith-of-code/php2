@@ -37,8 +37,17 @@ if (class_exists($controllerClass)){
 
 
 //$prod = new Product('боты', 'lorem lorem','loremloremloremloremloremloremlorem','boots','одежда',100);
-//var_dump($prod);
 //$prod->save();
+//var_dump($prod);
+
+$prod3 = Product::getOne(113);
+
+$prod3->name = 'кепка';
+var_dump($prod3);
+$prod3->price = 300;
+
+$prod3->save();
+var_dump($prod3);
 //var_dump($prod);
 //$prod->delete();
 

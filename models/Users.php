@@ -3,10 +3,13 @@
 namespace app\models;
 
 class Users extends DbModel {
-    public $id;
-    public $login;
-    public $hash;
+    protected $id;
+    protected $login;
+    protected $hash;
 
+    protected $props = [
+        'login' => false,
+    ];
        public function __construct($login = null, $hash = null)
     {
 
