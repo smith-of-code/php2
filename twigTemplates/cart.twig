@@ -1,0 +1,9 @@
+<h1>КОРЗИНА</h1>
+
+{% for item in carts %}
+    <div style="border: 1px solid black">
+        <p>ID корзины{{ item.id }}</p>
+        <p>ID товара{{ item.product_id }}</p>
+    </div>
+
+{% endfor %}

@@ -1,10 +1,14 @@
 <?php
 
 use app\models\{Product, Users, Cart, ConfirmCarts};
-use app\engine\{Db,Autoload};
+use app\engine\{Db,Autoload,Render,TwigRender};
 
 include "../config/config.php";
 include "../engine/Autoload.php";
+
+require_once '../vendor/autoload.php';
+
+
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
@@ -17,7 +21,7 @@ $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller
 
 
 if (class_exists($controllerClass)){
-    $controller = new $controllerClass();
+    $controller = new $controllerClass(new TwigRender());
     $controller->runAction($actionName);
 }else{
     echo "404(нет такого класса)";
@@ -40,14 +44,14 @@ if (class_exists($controllerClass)){
 //$prod->save();
 //var_dump($prod);
 
-$prod3 = Product::getOne(113);
-
-$prod3->name = 'кепка';
-var_dump($prod3);
-$prod3->price = 300;
-
-$prod3->save();
-var_dump($prod3);
+//$prod3 = Product::getOne(113);
+//
+//$prod3->name = 'кепка';
+//var_dump($prod3);
+//$prod3->price = 300;
+//
+//$prod3->save();
+//var_dump($prod3);
 //var_dump($prod);
 //$prod->delete();
 

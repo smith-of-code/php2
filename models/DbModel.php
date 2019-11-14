@@ -64,6 +64,15 @@ abstract class DbModel extends Model
         $this->resetProps();
     }
 
+    public static function getLimit($from = 0, $to = 1) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM `{$tableName}` LIMIT {$to} OFFSET {$from} ";
+        return Db::getInstance()->queryAll($sql);
+    }
+
+    public function getWhere($name, $value) {
+
+    }
 
     public static function getOne($id){
         $tableName = static::getTableName();
