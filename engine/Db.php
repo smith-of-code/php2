@@ -33,7 +33,7 @@ class Db
 
     //Запрос вида "SELECT * FROM goods WHERE id = :id"
     // :id - для вставки из параметров
-    // $params = ["id" => 1]
+    // $params = ["id" => 1]]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
