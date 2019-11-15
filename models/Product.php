@@ -5,15 +5,22 @@ namespace app\models;
 use app\engine\Db;
 
 class Product extends DbModel {
-    public $id;
-    public $name;
-    public $short_desc;
-    public $full_desc;
-    public $image;
-    public $category;
-    public $price;
+    protected $id;
+    protected $name;
+    protected $short_desc;
+    protected $full_desc;
+    protected $image;
+    protected $category;
+    protected $price;
 
-
+    protected $props = [
+        'name'=> false,
+        'short_desc'=> false,
+        'full_desc'=> false,
+        'image'=> false,
+        'category'=> false,
+        'price'=> false,
+    ];
 
     public function __construct(
                                 $name = null,

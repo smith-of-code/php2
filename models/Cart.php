@@ -3,10 +3,15 @@
 namespace app\models;
 
 class Cart extends DbModel {
-    public $id;
-    public $session_id;
-    public $product_id;
-    public $count;
+    protected $id;
+    protected $session_id;
+    protected $product_id;
+    protected $count;
+
+    protected $props = [
+        'product_id'=> false,
+        'count'=> false
+    ];
 
     public function __construct($session_id = null, $product_id = null, $count = null)
     {

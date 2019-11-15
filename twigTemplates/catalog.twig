@@ -1,0 +1,37 @@
+<h1>Каталог</h1>
+<div id="catalog">
+    {% for item in catalog %}
+        <a href="/product/card/?id={{ item.id | raw}}">
+            <h3>{{ item.name | raw }}</h3>
+            <img width="150px" src="/img/{{ item.image | raw }}" alt="">
+            <p>{{ item.short_desc | raw }}</p>
+            <p>{{ item.price | raw }}</p>
+        </a>
+    {% endfor %}
+</div>
+
+<button id="limit" data-from="1" data-to="1">еще(+1)</button>
+
+<script>
+const limit = document.querySelector('#limit');
+
+limit.addEventListener('click', ()=>{
+
+    (async ()=>{
+        const response = await fetch('/product/apilimit/?from=' + +limit.dataset.from + '&to=' + +limit.dataset.to);
+        const answer = await response.json();
+        answer.forEach (function(item, i, arr){
+           let product = `
+           <a href="/product/card/?id=${item.id}">
+        <h3>${item.name}</h3>
+        <img width="150px" src="/img/${item.image}" alt="">
+        <p>${item.short_desc}</p>
+        <p>${item.price}</p>
+    </a>
+           `;
+            document.querySelector('#catalog').insertAdjacentHTML("beforeend", product);
+        });
+        limit.dataset.from = +limit.dataset.from + 1;
+    })();
+})
+</script>

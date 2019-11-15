@@ -18,8 +18,9 @@ abstract class DbModel extends Model
     public function insert() {
         $params = [];
         $columns = [];
+
         foreach ($this as $key => $value){
-            if ($key === 'id' && is_null($this->$key)){
+            if (!isset($this->props[$key])){
                 continue;
             }
             $params[":{$key}"] = $value;
@@ -46,9 +47,33 @@ abstract class DbModel extends Model
     }
 
     public function update() {
+        $params = [];
+        $columns = [];
+        foreach ($this->props as $key => $value){
+            if (!$this->props[$key]){
+                continue;
+            }
+            $params[":{$key}"] = $this->$key;
+            $columns[] = "$key = :{$key}";
+
+            $this->props[$key] = false;
+        }
+        $columns = implode(', ', $columns );
 
         $tableName = static::getTableName();
-        $sql = "UPDATE `{$tableName}` SET where id = {$this->id}";
+        $sql = "UPDATE `{$tableName}` SET $columns where id = {$this->id}";
+        Db::getInstance()->execute($sql,$params);
+        $this->resetProps();
+    }
+
+    public static function getLimit($from = 0, $to = 1) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM `{$tableName}` LIMIT {$to} OFFSET {$from} ";
+        return Db::getInstance()->queryAll($sql);
+    }
+
+    public function getWhere($name, $value) {
+
     }
 
     public static function getOne($id){
@@ -63,5 +88,10 @@ abstract class DbModel extends Model
         return Db::getInstance()->queryAll($sql);
     }
 
+    private function resetProps(){
+        foreach ($this->props as $key => $value){
+            $this->props[$key] = false;
+        }
+    }
     abstract public static function getTableName();
 }

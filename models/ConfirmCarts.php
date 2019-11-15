@@ -3,12 +3,17 @@
 namespace app\models;
 
 class ConfirmCarts extends DbModel {
-    public $id;
-    public $session_id;
-    public  $name;
-    public $status;
-    public $phone;
+    protected $id;
+    protected $session_id;
+    protected $name;
+    protected $status;
+    protected $phone;
 
+    protected $props = [
+        'namev'=> false,
+        'statusv'=> false,
+        'phonev'=> false,
+    ];
 
     public function __construct($session_id = null, $name = null, $status = null, $phone = null)
     {
