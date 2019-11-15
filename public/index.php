@@ -3,10 +3,9 @@
 use app\models\{Product, Users, Cart, ConfirmCarts};
 use app\engine\{Db,Autoload,Render,TwigRender};
 
-include "../config/config.php";
-include "../engine/Autoload.php";
-
-require_once '../vendor/autoload.php';
+include realpath("../config/config.php") ;
+include realpath("../engine/Autoload.php") ;
+include realpath("../vendor/autoload.php");
 
 
 

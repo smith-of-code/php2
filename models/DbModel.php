@@ -55,6 +55,8 @@ abstract class DbModel extends Model
             }
             $params[":{$key}"] = $this->$key;
             $columns[] = "$key = :{$key}";
+
+            $this->props[$key] = false;
         }
         $columns = implode(', ', $columns );
 
