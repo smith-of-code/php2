@@ -63,23 +63,25 @@ abstract class DbModel extends Model
         $tableName = static::getTableName();
         $sql = "UPDATE `{$tableName}` SET $columns where id = {$this->id}";
         Db::getInstance()->execute($sql,$params);
-        $this->resetProps();
     }
 
     public static function getLimit($from = 0, $to = 1) {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM `{$tableName}` LIMIT {$to} OFFSET {$from} ";
-        return Db::getInstance()->queryAll($sql);
+        $sql = "SELECT * FROM {$tableName} LIMIT :from, :to";
+        $result =  Db::getInstance()->queryLimit($sql, $from, $to);
+        return $result;
     }
 
-    public function getWhere($name, $value) {
-
+    public function getWhere($field, $value) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value";
+        return Db::getInstance()->queryClass($sql, ["value" => $value], static::class);
     }
 
     public static function getOne($id){
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}` WHERE id =:id";
-        return Db::getInstance()->queryClass($sql,['id' => $id], static::class);
+        return Db::getInstance()->queryClass($sql, ['id' => $id], static::class);
     }
 
     public static function getAll(){
@@ -88,10 +90,5 @@ abstract class DbModel extends Model
         return Db::getInstance()->queryAll($sql);
     }
 
-    private function resetProps(){
-        foreach ($this->props as $key => $value){
-            $this->props[$key] = false;
-        }
-    }
     abstract public static function getTableName();
 }

@@ -41,6 +41,13 @@ class Db
 
 
     }
+    public function queryLimit($sql, $from, $to) {
+        $pdoStatement = $this->getConnection()->prepare($sql);
+        $pdoStatement->bindValue(':from', $from, \PDO::PARAM_INT);
+        $pdoStatement->bindValue(':to', $to, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchAll();
+    }
 
     private function prepareDSNstring(){
         return sprintf("%s:host=%s;dbname=%s;charset=%s",
