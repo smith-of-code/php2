@@ -1,9 +1,59 @@
 <h1>КОРЗИНА</h1>
 
-{% for item in carts %}
-    <div style="border: 1px solid black">
-        <p>ID корзины{{ item.id }}</p>
-        <p>ID товара{{ item.product_id }}</p>
-    </div>
+<div id="cart" data-id="{{ item.id_cart | raw}}">
+    {% for item in cart %}
+        <div class="cart-item">
+            <a href="/product/card/?id={{ item.id_prod | raw}}">
+                <h3>{{ item.name | raw }}</h3>
+                <img width="150px" src="/img/{{ item.image | raw }}" alt="">
+                <p>{{ item.short_desc | raw }}</p>
+                <p>{{ item.price | raw }}</p>
+            </a>
+            <div class="del" id="{{ item.id_cart | raw}}">удалить из корзины</div>
+        </div>
 
-{% endfor %}
+
+    {% endfor %}
+</div>
+
+<script>
+
+    let delFromCart = document.querySelectorAll('.del');
+
+    delFromCart.forEach((elem) => {
+        elem.addEventListener('click', (event) => {
+            let id = elem.getAttribute('id');
+
+            (
+                async () => {
+                    const response = await fetch('/cart/DelFromCart/', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            id: id,
+                        })
+                    });
+                    const answer = await response.json();
+                    if (answer.response === 'ok'){
+                        let margin = 0;
+                        event.target.parentNode.style.filter = 'grayscale(1)';
+                        setInterval(()=>{
+                            event.target.parentNode.style.marginLeft = margin +'px' ;
+                            margin -= 30;
+                            if (margin <= -3000 ){
+                                event.target.parentNode.remove();
+                            }
+
+                        },15);
+
+
+                    }
+                    document.getElementById('count').innerText = answer.count;
+                    console.log(answer.response);
+                }
+            )();
+        })
+    });
+</script>
