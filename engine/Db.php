@@ -33,13 +33,20 @@ class Db
 
     //Запрос вида "SELECT * FROM goods WHERE id = :id"
     // :id - для вставки из параметров
-    // $params = ["id" => 1]
+    // $params = ["id" => 1]]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
         return $pdoStatement;
 
 
+    }
+    public function queryLimit($sql, $from, $to) {
+        $pdoStatement = $this->getConnection()->prepare($sql);
+        $pdoStatement->bindValue(':from', $from, \PDO::PARAM_INT);
+        $pdoStatement->bindValue(':to', $to, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchAll();
     }
 
     private function prepareDSNstring(){
@@ -77,6 +84,7 @@ class Db
 
     public function queryClass($sql, $params, $class){
         $pdoStatement = $this->query($sql,$params);
+
         $pdoStatement->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $class);
         return $pdoStatement->fetch();
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 14 2019 г., 23:42
+-- Время создания: Ноя 17 2019 г., 19:20
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -31,38 +31,27 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `count` int(11) DEFAULT '0'
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `cart`
 --
 
-INSERT INTO `cart` (`id`, `session_id`, `product_id`, `count`) VALUES
-(56, 'iq5h12e1u3v73cqsnv6d7qasfu0hppgl', 2, 38),
-(57, 'iq5h12e1u3v73cqsnv6d7qasfu0hppgl', 3, 22),
-(58, 'iq5h12e1u3v73cqsnv6d7qasfu0hppgl', 1, 70),
-(84, 'eqbam8i1i12k8kpshen9p6phmaka9562', 1, 21),
-(85, '1ol9v8u358c557mondec7e1bljc71ft4', 1, 20),
-(86, '1ol9v8u358c557mondec7e1bljc71ft4', 2, 19),
-(87, 'ahfum5kdmklhbj5enu0c01q2ivlslcl6', 1, 17),
-(88, 'ahfum5kdmklhbj5enu0c01q2ivlslcl6', 2, 17),
-(92, 'bva75m3lqcu8sq058jlstff9fnauktel', 1, 15),
-(93, 'bva75m3lqcu8sq058jlstff9fnauktel', 2, 13),
-(94, 'bva75m3lqcu8sq058jlstff9fnauktel', 3, 9),
-(95, 'gbteja158gvu3rk6egaj0cfd05ubvphd', 1, 10),
-(96, 'gbteja158gvu3rk6egaj0cfd05ubvphd', 2, 12),
-(97, 'gbteja158gvu3rk6egaj0cfd05ubvphd', 3, 7),
-(100, '1pcdaqd4tvclqdgnrsia6dh4sih5vjl6', 1, 6),
-(101, '1pcdaqd4tvclqdgnrsia6dh4sih5vjl6', 2, 8),
-(102, '1pcdaqd4tvclqdgnrsia6dh4sih5vjl6', 3, 6),
-(103, '4kihhbqkqi3s3n8ckchrmbdjnbgsrfpf', 1, 3),
-(104, '4kihhbqkqi3s3n8ckchrmbdjnbgsrfpf', 2, 6),
-(105, 'hh1grfckuu7cearussregakjcpsq2v6d', 1, 3),
-(106, 'hh1grfckuu7cearussregakjcpsq2v6d', 2, 4),
-(107, 'bcmkmdjmofnfgejju1pqkpktq8p2secc', 1, 3),
-(108, 'bcmkmdjmofnfgejju1pqkpktq8p2secc', 3, 4);
+INSERT INTO `cart` (`id`, `session_id`, `product_id`) VALUES
+(143, '1d8gopqrdca3u187njncqugn68mtrk4o', 2),
+(144, '1d8gopqrdca3u187njncqugn68mtrk4o', 3),
+(145, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
+(146, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
+(147, '1d8gopqrdca3u187njncqugn68mtrk4o', 113),
+(148, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
+(149, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
+(150, '1d8gopqrdca3u187njncqugn68mtrk4o', 3),
+(151, '1d8gopqrdca3u187njncqugn68mtrk4o', 2),
+(183, 'fao3ujs0t60go034l8bh3unjon21buli', 2),
+(184, 'fao3ujs0t60go034l8bh3unjon21buli', 3),
+(185, 'fao3ujs0t60go034l8bh3unjon21buli', 112),
+(186, 'fao3ujs0t60go034l8bh3unjon21buli', 113);
 
 -- --------------------------------------------------------
 
@@ -205,7 +194,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT для таблицы `confirm_carts`

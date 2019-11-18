@@ -6,6 +6,8 @@ namespace app\controllers;
 
 use app\interfaces\IRenderer;
 use app\models\Product;
+use app\models\Users;
+use app\models\Cart;
 
 class Controller implements IRenderer
 {
@@ -35,8 +37,12 @@ class Controller implements IRenderer
     public function render($template, $params = []){
         if ($this->useLayout){
             return $this->renderTemplate("layouts/{$this->layout}", [
-                'menu' => $this->renderTemplate("menu"),
+                'menu' => $this->renderTemplate("menu",[
+                'count' => Cart::getCountWhere('session_id', session_id())
+                ]),
                 'content' => $this->renderTemplate($template,$params),
+                'auth' => Users::isAuth(),
+                'username' => Users::getName(),
             ]);
         }else{
             return $this->renderTemplate($template, $params = []);
