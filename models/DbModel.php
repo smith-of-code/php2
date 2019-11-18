@@ -82,6 +82,11 @@ abstract class DbModel extends Model
         $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=:value";
         return Db::getInstance()->queryOne($sql, ["value"=>$value])['count'];
     }
+    public static function deleteWhere($id, $session){
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM `{$tableName}` where id = :id AND session_id = :session_id";
+        return Db::getInstance()->execute($sql,['id' => $id, 'session_id' => $session]);
+    }
 
     public static function getOne($id){
         $tableName = static::getTableName();

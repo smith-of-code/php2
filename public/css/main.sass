@@ -1,0 +1,108 @@
+body
+  background-color: darkgrey
+
+#catalog
+  display: flex
+  justify-content: space-around
+  align-items: center
+
+.product-item
+  width: 250px
+  padding: 10px
+  display: flex
+  flex-direction: column
+  align-items: center
+  border: 2px solid white
+  transition: all 0.3s
+  &:hover
+    box-shadow: 3px 2px 4px 0 rgba(50, 50, 50, 0.75)
+    transform: scale(1.1,1.1)
+.product-item a
+  display: flex
+  flex-direction: column
+  align-items: center
+  text-decoration: none
+  color: black
+  font-size: 1em
+.buy
+  background-color: darkred
+  color: white
+  font-size: 19px
+  padding: 15px
+  text-align: center
+  border: 2px solid transparent
+  transition: all 0.3s
+  cursor: grab
+  &:hover
+    background-color: white
+    border: 2px solid darkred
+    color: darkred
+
+#cart
+  display: flex
+  flex-direction: column
+  align-items: center
+.cart-item
+  position: relative
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin: 15px
+  background-color: burlywood
+  padding: 15px
+  width: 500px
+.cart-item a
+  display: flex
+  flex-direction: column
+  align-items: center
+  text-decoration: none
+  color: black
+  font-size: 1em
+
+.del
+  position: absolute
+  top: 47px
+  right: -11px
+  transform: rotate(45deg)
+  background-color: brown
+  padding: 5px
+  color: white
+  font-size: 16px
+  border: 2px solid brown
+  transition: all 0.3s
+  cursor: pointer
+  &:hover
+    background-color: white
+    color: brown
+    border: 2px solid brown
+
+.nav
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: burlywood
+
+.nav a
+  text-decoration: none
+  font-size: 25px
+  color: chocolate
+  background-color: black
+  padding: 5px
+  margin: 0 10px
+  transition: all 0.3s
+  &:hover
+    transform: scale(1.1,1.1)
+.nav__cart
+  position: relative
+#count
+  border-radius: 50%
+  padding: 5px
+  position: absolute
+  background-color: red
+  color: white
+  top: -30px
+  right: -10px
+  width: 20px
+  height: 20px
+  font-size: 18px
+  text-align: center

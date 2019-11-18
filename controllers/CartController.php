@@ -24,10 +24,8 @@ class CartController extends Controller
     public function actionDelFromCart(){
 
         $id = (new Request())->getParams()['id'];
-        $cart = new Cart();
-        $cart->id = $id;
-        $cart->delete();
-        header('Content-Type: application/json');
+        Cart::deleteWhere($id, session_id());
+         header('Content-Type: application/json');
         echo json_encode(['response' => 'ok', 'count' => Cart::getCountWhere('session_id', session_id())]);
         die();
 

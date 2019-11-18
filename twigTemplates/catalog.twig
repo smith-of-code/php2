@@ -2,13 +2,13 @@
 <div id="catalog">
     {% for item in catalog %}
         <div class="product-item">
-            <a href="/product/card/?id={{ item.id | raw}}">
-                <h3>{{ item.name | raw }}</h3>
-                <img width="150px" src="/img/{{ item.image | raw }}" alt="">
-                <p>{{ item.short_desc | raw }}</p>
-                <p>{{ item.price | raw }}</p>
+            <a href="/product/card/?id={{ item.id}}">
+                <h3>{{ item.name }}</h3>
+                <img width="150px" src="/img/{{ item.image }}" alt="">
+                <p>{{ item.short_desc}}</p>
+                <p>{{ item.price}}</p>
             </a>
-            <div class="buy" data-id="{{ item.id | raw}}">добаваить в корзину</div>
+            <div class="buy" data-id="{{ item.id}}">добаваить в корзину</div>
         </div>
 
 
