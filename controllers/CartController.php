@@ -4,34 +4,35 @@
 namespace app\controllers;
 
 use app\engine\Request;
-use app\models\Cart;
+use app\models\entities\Cart;
+use app\models\repositories\CartRepository;
 
 class CartController extends Controller
 {
 
     public function actionIndex(){
-        $cart = Cart::getCart(session_id());
+        $cart = (new CartRepository())->getCart(session_id());
         echo $this->render('cart', ['cart'=>$cart]);
     }
 
-    public function actionAddToCart(){
+    public function actionAddToCart()
+    {
         $id = (new Request())->getParams()['id'];
-        (new Cart(session_id(), $id))->save();
+        (new CartRepository())->save(new Cart(session_id(), $id));
         header('Content-Type: application/json');
-        echo json_encode(['response' => 'ok', 'count' => Cart::getCountWhere('session_id', session_id())]);
+        echo json_encode(['response' => 'ok', 'count' => (new CartRepository())->getCountWhere('session_id', session_id())]);
         die();
     }
     public function actionDelFromCart(){
 
         $id = (new Request())->getParams()['id'];
-        Cart::deleteWhere($id, session_id());
+        (new CartRepository())->deleteWhere($id,'session_id',session_id());
          header('Content-Type: application/json');
-        echo json_encode(['response' => 'ok', 'count' => Cart::getCountWhere('session_id', session_id())]);
+        echo json_encode(['response' => 'ok', 'count' => (new CartRepository())->getCountWhere('session_id', session_id())]);
         die();
+    }
+    public function actionCreateOrders(){
 
 
-        header('Content-Type: application/json');
-        echo json_encode(['response' => 'ok', 'count' => Cart::getCountWhere('session_id', session_id())]);
-        die();
     }
 }

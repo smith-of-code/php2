@@ -1,8 +1,10 @@
 <?php
 
-namespace app\models;
+namespace app\models\entities;
 
-class ConfirmCarts extends DbModel {
+use app\models\Model;
+
+class Orders extends Model {
     protected $id;
     protected $session_id;
     protected $name;
@@ -10,9 +12,10 @@ class ConfirmCarts extends DbModel {
     protected $phone;
 
     protected $props = [
-        'namev'=> false,
-        'statusv'=> false,
-        'phonev'=> false,
+        'session_id' => false,
+        'name' => false,
+        'status' => false,
+        'phone' => false,
     ];
 
     public function __construct($session_id = null, $name = null, $status = null, $phone = null)
@@ -25,8 +28,4 @@ class ConfirmCarts extends DbModel {
     }
 
 
-    public static function getTableName()
-    {
-     return 'confirm_carts';
-    }
 }

@@ -71,7 +71,7 @@ CREATE TABLE `confirm_carts` (
 -- Дамп данных таблицы `confirm_carts`
 --
 
-INSERT INTO `confirm_carts` (`id`, `session_id`, `name`, `status`, `phone`) VALUES
+INSERT INTO orders (`id`, `session_id`, `name`, `status`, `phone`) VALUES
 (30, 'hh1grfckuu7cearussregakjcpsq2v6d', 'паврпва', 'disapproved', '44444'),
 (31, 'bcmkmdjmofnfgejju1pqkpktq8p2secc', 'вася', 'disapproved', '4564645');
 
@@ -165,7 +165,7 @@ ALTER TABLE `cart`
 --
 -- Индексы таблицы `confirm_carts`
 --
-ALTER TABLE `confirm_carts`
+ALTER TABLE orders
   ADD PRIMARY KEY (`id`);
 
 --
@@ -199,7 +199,7 @@ ALTER TABLE `cart`
 --
 -- AUTO_INCREMENT для таблицы `confirm_carts`
 --
-ALTER TABLE `confirm_carts`
+ALTER TABLE orders
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
