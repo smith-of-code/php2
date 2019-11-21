@@ -3,27 +3,26 @@
 
 namespace app\models;
 
-
 use app\engine\Db;
+use app\interfaces\IModels;
 
-abstract class DbModel extends Model
+abstract class Repository implements IModels
 {
-    public function save() {
-        if (is_null($this->id)){
-            $this->insert();
+    public function save(Model $entity) {
+        if (is_null($entity->id)){
+            $this->insert($entity);
         }else{
-            $this->update();
+            $this->update($entity);
         }
     }
-    public function insert() {
+    public function insert(Model $entity) {
         $params = [];
         $columns = [];
-
-        foreach ($this as $key => $value){
-            if (!isset($this->props[$key])){
-                continue;
-            }
-            $params[":{$key}"] = $value;
+        foreach ($entity->props as $key => $value){
+        if ($key === 'id'){
+            continue;
+        }
+            $params[":{$key}"] = $entity->$key;
             $columns[] = $key;
         }
         $columns = implode(', ', $columns );
@@ -32,73 +31,72 @@ abstract class DbModel extends Model
         $tableName = static::getTableName();
 
         $sql = "INSERT INTO `{$tableName}` ({$columns}) VALUES ($values)";
-
         Db::getInstance()->execute($sql,$params);
 
-        $this->id = Db::getInstance()->lastId();
+        $entity->id = Db::getInstance()->lastId();
 
-        return $this;
     }
 
-    public function delete() {
-        $tableName = static::getTableName();
-        $sql = "DELETE FROM `{$tableName}` where id = :id";
-        return Db::getInstance()->execute($sql,['id' => $this->id]);
-    }
-
-    public function update() {
+    public function update(Model $entity) {
         $params = [];
         $columns = [];
-        foreach ($this->props as $key => $value){
-            if (!$this->props[$key]){
+        foreach ($entity->props as $key => $value){
+            if (!$entity->props[$key]){
                 continue;
             }
             $params[":{$key}"] = $this->$key;
             $columns[] = "$key = :{$key}";
 
-            $this->props[$key] = false;
+            $entity->props[$key] = false;
         }
         $columns = implode(', ', $columns );
 
         $tableName = static::getTableName();
-        $sql = "UPDATE `{$tableName}` SET $columns where id = {$this->id}";
+        $sql = "UPDATE `{$tableName}` SET $columns where id = {$entity->id}";
         Db::getInstance()->execute($sql,$params);
     }
 
-    public static function getLimit($from = 0, $to = 1) {
+    public function delete(Model $entity) {
+        $tableName = static::getTableName();
+        $sql = "DELETE FROM `{$tableName}` where id = :id";
+        return Db::getInstance()->execute($sql,['id' => $entity->id]);
+    }
+
+
+
+    public function getLimit($from = 0, $to = 1) {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} LIMIT :from, :to";
         $result =  Db::getInstance()->queryLimit($sql, $from, $to);
         return $result;
     }
 
-    public static function getWhere($field, $value) {
+    public function getWhere($field, $value) {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value";
-         return Db::getInstance()->queryClass($sql, ["value" => $value], static::class);
+         return Db::getInstance()->queryClass($sql, ["value" => $value], $this->getEntityClass());
     }
-    public static function getCountWhere($field, $value) {
+    public function getCountWhere($field, $value) {
         $tableName = static::getTableName();
         $sql = "SELECT count(*) as count FROM {$tableName} WHERE `$field`=:value";
         return Db::getInstance()->queryOne($sql, ["value"=>$value])['count'];
     }
-    public static function deleteWhere($id, $session){
+    public function deleteWhere($id, $field, $value){
         $tableName = static::getTableName();
-        $sql = "DELETE FROM `{$tableName}` where id = :id AND session_id = :session_id";
-        return Db::getInstance()->execute($sql,['id' => $id, 'session_id' => $session]);
+        $sql = "DELETE FROM `{$tableName}` where id = :id AND `$field`=:value";
+        return Db::getInstance()->execute($sql,['id' => $id, 'value' => $value]);
     }
 
-    public static function getOne($id){
+    public function getOne($id){
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}` WHERE id =:id";
-        return Db::getInstance()->queryClass($sql, ['id' => $id], static::class);
+        return Db::getInstance()->queryClass($sql, ['id' => $id], $this->getEntityClass());
     }
 
-    public static function getAll(){
+    public function getAll(){
         $tableName = static::getTableName();
         $sql = "SELECT * FROM `{$tableName}`";
         return Db::getInstance()->queryAll($sql);
     }
 
-    abstract public static function getTableName();
 }
