@@ -5,7 +5,9 @@ namespace app\controllers;
 
 use app\engine\Request;
 use app\models\entities\Cart;
+use app\models\entities\Orders;
 use app\models\repositories\CartRepository;
+use app\models\repositories\OrdersRepository;
 
 class CartController extends Controller
 {
@@ -31,8 +33,11 @@ class CartController extends Controller
         echo json_encode(['response' => 'ok', 'count' => (new CartRepository())->getCountWhere('session_id', session_id())]);
         die();
     }
-    public function actionCreateOrders(){
-
+    public function actionCreateOrder(){
+        extract((new Request())->getParams());
+        (new OrdersRepository())->save(new Orders(session_id(), $name, $phone));
+        session_regenerate_id();
+        header("Location: {$_SERVER['HTTP_REFERER']}");
 
     }
 }

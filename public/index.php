@@ -4,7 +4,7 @@ use app\models\{Product, Users, Cart, ConfirmCarts};
 use app\engine\{Db,Autoload,Render,TwigRender,Request};
 try{
     include realpath("../config/config.php") ;
-    include realpath("../engine/Autoload.php") ;
+//    include realpath("../engine/Autoload.php") ;
     include realpath("../vendor/autoload.php");
 
     spl_autoload_register([new Autoload(), 'loadClass']);
@@ -25,7 +25,7 @@ try{
         echo "404(нет такого класса)";
     }
 }catch (\Exception $e){
-    var_dump($e);
+    echo "<h1>{$e->getMessage()}</h1>";
 }
 
 

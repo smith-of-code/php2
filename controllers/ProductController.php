@@ -22,6 +22,9 @@ class ProductController extends Controller
     public function actionCard(){
         $id = (new Request())->getParams()['id'];
         $product = (new ProductRepositiry())->getOne($id);
+        if (!$product){
+            throw new \Exception("Продукта с id - {$id} не существует");
+        }
         echo $this->render('card', ['product' => $product]);
     }
 
