@@ -1,5 +1,11 @@
 <h1>КОРЗИНА</h1>
 
+<form action="/cart/createorder/" method="post">
+    <input name="name" type="text"placeholder="введите имя" pattern="^[а-яА-Я]+$" required>
+    <input name="phone" type="text" placeholder="+7 999 999 99 99" pattern="^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$" required>
+    <input type="submit">
+</form>
+
 <div id="cart" data-id="{{ item.id_cart}}">
     {% for item in cart %}
         <div class="cart-item">

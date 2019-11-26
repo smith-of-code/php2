@@ -2,28 +2,32 @@
 session_start();
 use app\models\{Product, Users, Cart, ConfirmCarts};
 use app\engine\{Db,Autoload,Render,TwigRender,Request};
+try{
+    include realpath("../config/config.php") ;
+//    include realpath("../engine/Autoload.php") ;
+    include realpath("../vendor/autoload.php");
 
-include realpath("../config/config.php") ;
-include realpath("../engine/Autoload.php") ;
-include realpath("../vendor/autoload.php");
-
-spl_autoload_register([new Autoload(), 'loadClass']);
-
-
-$request = new Request();
-
-$controllerName = $request->getControllerName() ?: 'product';
-$actionName = $request->getActionName();
-
-$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+    spl_autoload_register([new Autoload(), 'loadClass']);
 
 
-if (class_exists($controllerClass)){
-    $controller = new $controllerClass(new TwigRender());
-    $controller->runAction($actionName);
-}else{
-    echo "404(нет такого класса)";
+    $request = new Request();
+
+    $controllerName = $request->getControllerName() ?: 'product';
+    $actionName = $request->getActionName();
+
+    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+
+
+    if (class_exists($controllerClass)){
+        $controller = new $controllerClass(new TwigRender());
+        $controller->runAction($actionName);
+    }else{
+        echo "404(нет такого класса)";
+    }
+}catch (\Exception $e){
+    echo "<h1>{$e->getMessage()}</h1>";
 }
+
 
 
 

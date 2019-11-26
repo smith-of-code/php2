@@ -5,9 +5,11 @@ namespace app\controllers;
 
 
 use app\interfaces\IRenderer;
-use app\models\Product;
-use app\models\Users;
-use app\models\Cart;
+use app\models\entities\Product;
+use app\models\entities\Users;
+use app\models\entities\Cart;
+use app\models\repositories\CartRepository;
+use app\models\repositories\UsersRepository;
 
 class Controller implements IRenderer
 {
@@ -38,11 +40,11 @@ class Controller implements IRenderer
         if ($this->useLayout){
             return $this->renderTemplate("layouts/{$this->layout}", [
                 'menu' => $this->renderTemplate("menu",[
-                'count' => Cart::getCountWhere('session_id', session_id())
+                'count' => (new CartRepository())->getCountWhere('session_id', session_id())
                 ]),
                 'content' => $this->renderTemplate($template,$params),
-                'auth' => Users::isAuth(),
-                'username' => Users::getName(),
+                'auth' => (new UsersRepository())->isAuth(),
+                'username' => (new UsersRepository())->getName(),
             ]);
         }else{
             return $this->renderTemplate($template, $params = []);

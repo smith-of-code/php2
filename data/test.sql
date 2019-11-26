@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 17 2019 г., 19:20
+-- Время создания: Ноя 24 2019 г., 15:23
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -39,41 +39,12 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `session_id`, `product_id`) VALUES
-(143, '1d8gopqrdca3u187njncqugn68mtrk4o', 2),
-(144, '1d8gopqrdca3u187njncqugn68mtrk4o', 3),
-(145, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
-(146, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
-(147, '1d8gopqrdca3u187njncqugn68mtrk4o', 113),
-(148, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
-(149, '1d8gopqrdca3u187njncqugn68mtrk4o', 112),
-(150, '1d8gopqrdca3u187njncqugn68mtrk4o', 3),
-(151, '1d8gopqrdca3u187njncqugn68mtrk4o', 2),
-(183, 'fao3ujs0t60go034l8bh3unjon21buli', 2),
-(184, 'fao3ujs0t60go034l8bh3unjon21buli', 3),
-(185, 'fao3ujs0t60go034l8bh3unjon21buli', 112),
-(186, 'fao3ujs0t60go034l8bh3unjon21buli', 113);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `confirm_carts`
---
-
-CREATE TABLE `confirm_carts` (
-  `id` int(11) NOT NULL,
-  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `confirm_carts`
---
-
-INSERT INTO `confirm_carts` (`id`, `session_id`, `name`, `status`, `phone`) VALUES
-(30, 'hh1grfckuu7cearussregakjcpsq2v6d', 'паврпва', 'disapproved', '44444'),
-(31, 'bcmkmdjmofnfgejju1pqkpktq8p2secc', 'вася', 'disapproved', '4564645');
+(278, 'lpcvqn7h555tger6os2uodkf96ltejac', 112),
+(279, 'lpcvqn7h555tger6os2uodkf96ltejac', 112),
+(280, 'lpcvqn7h555tger6os2uodkf96ltejac', 3),
+(281, 'lpcvqn7h555tger6os2uodkf96ltejac', 2),
+(282, 'lpcvqn7h555tger6os2uodkf96ltejac', 113),
+(283, 'ca6bluvdlddhcb1defj11mq5o1iqfu7v', 2);
 
 -- --------------------------------------------------------
 
@@ -104,6 +75,27 @@ INSERT INTO `menu` (`id`, `title`, `link`, `parent`) VALUES
 (9, 'каталог', '/catalog', 7),
 (10, 'Калькулятор', '/calculator', 0),
 (11, 'Корзина', '/cart', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id`, `session_id`, `name`, `status`, `phone`) VALUES
+(53, 'lpcvqn7h555tger6os2uodkf96ltejac', 'Василий', 'disapproved', '+795568522666');
 
 -- --------------------------------------------------------
 
@@ -163,15 +155,15 @@ ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `confirm_carts`
---
-ALTER TABLE `confirm_carts`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `menu`
 --
 ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -194,19 +186,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
-
---
--- AUTO_INCREMENT для таблицы `confirm_carts`
---
-ALTER TABLE `confirm_carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
 --
 ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT для таблицы `products`

@@ -27,13 +27,14 @@ class Db
                 $this->config['password']
             );
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
         return $this->connection;
     }
 
     //Запрос вида "SELECT * FROM goods WHERE id = :id"
     // :id - для вставки из параметров
-    // $params = ["id" => 1]]
+    // $params = ["id" => 1]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
@@ -59,7 +60,7 @@ class Db
     }
 
     public function lastId(){
-       return $this->connection->lastInsertId();
+       return $this->connection->lastInsertId() ;
     }
 
     public function __toString()
