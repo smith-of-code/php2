@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 24 2019 г., 15:23
+
+-- Время создания: Ноя 27 2019 г., 15:00
+
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -44,7 +46,22 @@ INSERT INTO `cart` (`id`, `session_id`, `product_id`) VALUES
 (280, 'lpcvqn7h555tger6os2uodkf96ltejac', 3),
 (281, 'lpcvqn7h555tger6os2uodkf96ltejac', 2),
 (282, 'lpcvqn7h555tger6os2uodkf96ltejac', 113),
-(283, 'ca6bluvdlddhcb1defj11mq5o1iqfu7v', 2);
+
+(283, 'ca6bluvdlddhcb1defj11mq5o1iqfu7v', 2),
+(285, 'no11uvhumcuk5ih3a1cpcralu6h29jpo', 112),
+(286, 'no11uvhumcuk5ih3a1cpcralu6h29jpo', 3),
+(287, '1tojniuab2vgknl0vnkmhbd8abaoibbn', 2),
+(288, '1tojniuab2vgknl0vnkmhbd8abaoibbn', 2),
+(289, 'm6crikehtsjsi4ib45nifuelcat8aqjs', 2),
+(290, 'm6crikehtsjsi4ib45nifuelcat8aqjs', 2),
+(291, 'afg6p3ft8j2iijo1hiv13chcbc43sb61', 2),
+(292, '8s1m1q7p7n37vs6m7n9nejkkstmilsea', 2),
+(293, 'u78pllov01tr16293a0u3bmj8rajg04r', 2),
+(294, '406uv4apn0h4cgprbhnkiorl2b0kkmov', 2),
+(295, 'bi4pqcj9c1kbc9979i03ad0ite2pbc24', 2),
+(296, '020n66f7q0n8761gkjmcc2ob3vnr9ugn', 2),
+(299, 'dkp9nkdu27s1c9mev3qv46nqldrgntv6', 2);
+
 
 -- --------------------------------------------------------
 
@@ -95,7 +112,17 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `session_id`, `name`, `status`, `phone`) VALUES
-(53, 'lpcvqn7h555tger6os2uodkf96ltejac', 'Василий', 'disapproved', '+795568522666');
+(53, 'lpcvqn7h555tger6os2uodkf96ltejac', 'Василий', 'cancel', '+795568522666'),
+(54, 'no11uvhumcuk5ih3a1cpcralu6h29jpo', 'Андрей', 'approved', '545454434343'),
+(55, '1tojniuab2vgknl0vnkmhbd8abaoibbn', 'Андрей', 'approved', '33333333333333'),
+(56, 'm6crikehtsjsi4ib45nifuelcat8aqjs', 'Андрей', 'disapproved', '33333333333333'),
+(57, 'afg6p3ft8j2iijo1hiv13chcbc43sb61', 'ffffffffff', 'disapproved', '44444444444444'),
+(58, '8s1m1q7p7n37vs6m7n9nejkkstmilsea', 'Андрей', 'disapproved', '33333333333'),
+(59, 'u78pllov01tr16293a0u3bmj8rajg04r', 'fffffffffffff', 'disapproved', '3333333333333333333'),
+(60, '406uv4apn0h4cgprbhnkiorl2b0kkmov', 'Андрей', 'disapproved', '33333333333333'),
+(61, 'bi4pqcj9c1kbc9979i03ad0ite2pbc24', 'Андрей', 'disapproved', '4444444444'),
+(62, '020n66f7q0n8761gkjmcc2ob3vnr9ugn', 'ffffffffffffffff', 'disapproved', '444444444444444');
+
 
 -- --------------------------------------------------------
 
@@ -141,8 +168,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `hash`) VALUES
-(1, 'admin', '$2y$10$epnTaveZrF2nyyd0ePk4tOwHOlJC48JtBA1HoYs7BXC8MEzzOEcTW', '12890046245db1a4a56f2299.27209101'),
-(2, 'user', '$2y$10$epnTaveZrF2nyyd0ePk4tOwHOlJC48JtBA1HoYs7BXC8MEzzOEcTW', '3682818575db1a4d79526e9.08916095');
+(1, 'admin', '$2y$10$epnTaveZrF2nyyd0ePk4tOwHOlJC48JtBA1HoYs7BXC8MEzzOEcTW', '7991257705dde642cb9bc88.53334377'),
+(2, 'user', '$2y$10$epnTaveZrF2nyyd0ePk4tOwHOlJC48JtBA1HoYs7BXC8MEzzOEcTW', '8027518085dde64ebe34ca9.59171498');
 
 --
 -- Индексы сохранённых таблиц
@@ -186,7 +213,9 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
+
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
@@ -198,7 +227,9 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
 
 --
 -- AUTO_INCREMENT для таблицы `products`

@@ -12,34 +12,16 @@ class Users extends Model {
 
     protected $props = [
         'login' => false,
+        'pass'=> false,
+        'hash'=> false,
+
     ];
        public function __construct($login = null, $pass = null, $hash = null)
     {
 
         $this->login = $login;
         $this->pass = $pass;
-        $this->hash = $pass;
-    }
-    public static function isAuth()
-    {
-           return isset($_SESSION['login']) ? true: false;
-    }
-    public static function getName()
-    {
-            return $_SESSION['login'];
-    }
-    public static function auth($login,$pass)
-    {
+        $this->hash = $hash;
 
-               $user = static::getWhere('login',$login);
-        if (password_verify($pass, $user->pass)) {
-            $_SESSION['login'] = $login;
-            return true;
-        }
-    }
-
-    public static function getTableName()
-    {
-        return 'users';
     }
 }

@@ -1,28 +1,66 @@
 <h1>КОРЗИНА</h1>
+<div id="cart-content">
+    {% if username != 'admin' %}
+        <form>
+            <input name="name" id="name" type="text"placeholder="введите имя" pattern="^[а-яА-Я]+$" required>
+            <input name="phone" id="phone" type="text" placeholder="+7 999 999 99 99" pattern="^(\s*)?(\+)?([- _():=+]?\d[-
+         _()
+        :=+]?){10,14}(\s*)?$" required>
+            <button id="submit-order">Оформить заказ</button>
+        </form>
+    {% endif %}
 
-<form action="/cart/createorder/" method="post">
-    <input name="name" type="text"placeholder="введите имя" pattern="^[а-яА-Я]+$" required>
-    <input name="phone" type="text" placeholder="+7 999 999 99 99" pattern="^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$" required>
-    <input type="submit">
-</form>
+    <div id="cart" data-id="{{ item.id_cart}}">
+        {% for item in cart %}
+            <div class="cart-item">
+                <a href="/product/card/?id={{ item.id_prod}}">
+                    <h3>{{ item.name}}</h3>
+                    <img width="150px" src="/img/{{ item.image}}" alt="">
+                    <p>{{ item.short_desc}}</p>
+                    <p>{{ item.price}}</p>
+                </a>
+                {% if username != 'admin' %}
+                    <div class="del" id="{{ item.id_cart}}">удалить из корзины</div>
+                {% endif %}
 
-<div id="cart" data-id="{{ item.id_cart}}">
-    {% for item in cart %}
-        <div class="cart-item">
-            <a href="/product/card/?id={{ item.id_prod}}">
-                <h3>{{ item.name}}</h3>
-                <img width="150px" src="/img/{{ item.image}}" alt="">
-                <p>{{ item.short_desc}}</p>
-                <p>{{ item.price}}</p>
-            </a>
-            <div class="del" id="{{ item.id_cart}}">удалить из корзины</div>
-        </div>
+            </div>
 
 
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 
+
 <script>
+    let submitOrder = document.querySelector('#submit-order');
+
+    submitOrder.addEventListener('click', (event) =>{
+        event.preventDefault();
+        let name = document.querySelector('#name').value;
+        let phone = document.querySelector('#phone').value;
+        (
+
+            async () => {
+                const response = await fetch('/cart/createorder/', {
+                    method: 'POST',
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                    })
+                });
+                const answer = await response.json();
+                if (answer.response === 'ok'){
+                  document.querySelector('#cart-content').innerHTML = '<p class="order-submited">Заказ сформирован</p>';
+                    document.getElementById('count').innerText = 0;
+              }
+
+            }
+        )();
+    });
+
 
     let delFromCart = document.querySelectorAll('.del');
 
@@ -57,7 +95,6 @@
 
                     }
                     document.getElementById('count').innerText = answer.count;
-                    console.log(answer.response);
                 }
             )();
         })

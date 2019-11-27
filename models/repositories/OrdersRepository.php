@@ -15,6 +15,8 @@ class OrdersRepository extends Repository
     }
     public function getEntityClass()
     {
-        return OrdersRepository::class;
+
+        return Orders::class;
+
     }
 }
