@@ -15,7 +15,9 @@ class AuthController extends Controller
     public function actionLogin() {
         $login = (new Request())->getParams()['login'];
         $pass = (new Request())->getParams()['pass'];
-        if (!(new UsersRepository())->auth($login,$pass)){
+        $save = ((new Request())->getParams()['save']);
+
+        if (!(new UsersRepository())->auth($login,$pass,$save)){
             die("Неверный пароль");
         }else
             header("Location: /");
@@ -23,6 +25,7 @@ class AuthController extends Controller
     }
 
     public function actionLogout() {
+        setcookie("hash", "", time() - 3600, "/");
         session_destroy();
         header("Location: /");
         exit();

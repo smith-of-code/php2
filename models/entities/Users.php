@@ -12,6 +12,8 @@ class Users extends Model {
 
     protected $props = [
         'login' => false,
+        'pass'=> false,
+        'hash'=> false,
     ];
        public function __construct($login = null, $pass = null, $hash = null)
     {

@@ -17,12 +17,20 @@ class UsersRepository extends Repository
     {
         return $_SESSION['login'];
     }
-    public function auth($login,$pass)
+    public function auth($login,$pass,$save)
     {
 
         $user = static::getWhere('login',$login);
         if (password_verify($pass, $user->pass)) {
             $_SESSION['login'] = $login;
+
+            $hash = uniqid(rand(), true);
+            $user->hash = $hash;
+            static::save($user);
+
+            if ($save){
+                setcookie("hash", $hash, time() + 3600, "/");
+            }
             return true;
         }
     }
