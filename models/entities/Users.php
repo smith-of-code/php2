@@ -14,6 +14,7 @@ class Users extends Model {
         'login' => false,
         'pass'=> false,
         'hash'=> false,
+
     ];
        public function __construct($login = null, $pass = null, $hash = null)
     {
@@ -21,5 +22,6 @@ class Users extends Model {
         $this->login = $login;
         $this->pass = $pass;
         $this->hash = $hash;
+
     }
 }

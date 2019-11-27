@@ -11,12 +11,14 @@ class Orders extends Model {
     protected $status;
     protected $phone;
 
-    public $props = [
+    protected $props = [
+
         'session_id' => false,
         'name' => false,
         'status' => false,
         'phone' => false,
     ];
+
 
     public function __construct( $session_id = null, $name = null, $phone = null, $status = 'disapproved')
     {
@@ -24,7 +26,6 @@ class Orders extends Model {
         $this->name = $name;
         $this->phone = $phone;
         $this->status = $status;
-
     }
 
 

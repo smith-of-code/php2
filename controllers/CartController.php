@@ -10,6 +10,7 @@ use app\models\repositories\CartRepository;
 use app\models\repositories\OrdersRepository;
 use app\models\repositories\UsersRepository;
 
+
 class CartController extends Controller
 {
 
@@ -30,11 +31,14 @@ class CartController extends Controller
 
         $id = (new Request())->getParams()['id'];
         (new CartRepository())->deleteWhere($id,'session_id',session_id());
-        header('Content-Type: application/json');
+
+         header('Content-Type: application/json');
+
         echo json_encode(['response' => 'ok', 'count' => (new CartRepository())->getCountWhere('session_id', session_id())]);
         die();
     }
     public function actionCreateOrder(){
+
         $name = (new Request())->getParams()['name'];
         $phone = (new Request())->getParams()['phone'];
         (new OrdersRepository())->save(new Orders(session_id(), $name, $phone));
@@ -51,7 +55,5 @@ class CartController extends Controller
         echo $this->render('cart', ['cart'=>$cart, 'username' => (new UsersRepository())->getName()]);
 
     }
-    public function actionChangeStatus(){
 
-    }
 }

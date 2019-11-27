@@ -17,7 +17,9 @@ class UsersRepository extends Repository
     {
         return $_SESSION['login'];
     }
+
     public function auth($login,$pass,$save)
+
     {
 
         $user = static::getWhere('login',$login);
@@ -31,6 +33,7 @@ class UsersRepository extends Repository
             if ($save){
                 setcookie("hash", $hash, time() + 3600, "/");
             }
+
             return true;
         }
     }

@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
+
 -- Время создания: Ноя 27 2019 г., 15:00
+
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.9
 
@@ -44,6 +46,7 @@ INSERT INTO `cart` (`id`, `session_id`, `product_id`) VALUES
 (280, 'lpcvqn7h555tger6os2uodkf96ltejac', 3),
 (281, 'lpcvqn7h555tger6os2uodkf96ltejac', 2),
 (282, 'lpcvqn7h555tger6os2uodkf96ltejac', 113),
+
 (283, 'ca6bluvdlddhcb1defj11mq5o1iqfu7v', 2),
 (285, 'no11uvhumcuk5ih3a1cpcralu6h29jpo', 112),
 (286, 'no11uvhumcuk5ih3a1cpcralu6h29jpo', 3),
@@ -58,6 +61,7 @@ INSERT INTO `cart` (`id`, `session_id`, `product_id`) VALUES
 (295, 'bi4pqcj9c1kbc9979i03ad0ite2pbc24', 2),
 (296, '020n66f7q0n8761gkjmcc2ob3vnr9ugn', 2),
 (299, 'dkp9nkdu27s1c9mev3qv46nqldrgntv6', 2);
+
 
 -- --------------------------------------------------------
 
@@ -118,6 +122,7 @@ INSERT INTO `orders` (`id`, `session_id`, `name`, `status`, `phone`) VALUES
 (60, '406uv4apn0h4cgprbhnkiorl2b0kkmov', 'Андрей', 'disapproved', '33333333333333'),
 (61, 'bi4pqcj9c1kbc9979i03ad0ite2pbc24', 'Андрей', 'disapproved', '4444444444'),
 (62, '020n66f7q0n8761gkjmcc2ob3vnr9ugn', 'ffffffffffffffff', 'disapproved', '444444444444444');
+
 
 -- --------------------------------------------------------
 
@@ -208,7 +213,9 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
+
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
@@ -220,7 +227,9 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
+
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
 
 --
 -- AUTO_INCREMENT для таблицы `products`

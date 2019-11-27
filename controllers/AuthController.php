@@ -15,9 +15,11 @@ class AuthController extends Controller
     public function actionLogin() {
         $login = (new Request())->getParams()['login'];
         $pass = (new Request())->getParams()['pass'];
+
         $save = ((new Request())->getParams()['save']);
 
         if (!(new UsersRepository())->auth($login,$pass,$save)){
+
             die("Неверный пароль");
         }else
             header("Location: /");
