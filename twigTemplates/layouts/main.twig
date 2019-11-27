@@ -7,7 +7,11 @@
 </head>
 <body>
 {% if auth %}
-Добро пожаловать <?=$username?> <a href="/auth/logout/"> [Выход]</a>
+<p>Добро пожаловать {{ username }}</p>
+    <a class="button" href="/auth/logout/"> Выход</a>
+    {% if username == 'admin' %}
+        <a class="button" href="/admin/">Админка</a>
+    {% endif %}
 {% else %}
 <form action="/auth/login/" method="post">
     <input type="text" name="login" placeholder="Логин">

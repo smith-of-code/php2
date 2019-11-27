@@ -113,4 +113,51 @@ body {
   font-size: 18px;
   text-align: center; }
 
+.order-submited {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  color: green;
+  background-color: white;
+  padding: 15px;
+  font-size: 50px; }
+
+.button {
+  font-size: 20px;
+  padding: 5px;
+  background-color: darkgrey;
+  color: darkred;
+  border: 2px solid darkred;
+  text-decoration: none;
+  cursor: pointer; }
+  .button:hover {
+    background-color: white;
+    color: darkgrey;
+    border: 2px solid darkgrey; }
+
+#order__catalog {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.order__item {
+  display: flex;
+  align-items: center;
+  margin: 15px; }
+
+.order__desc {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 0 5px;
+  border: 1px solid bisque;
+  text-decoration: none;
+  color: white; }
+
+.order__status {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase; }
+
 /*# sourceMappingURL=main.css.map */

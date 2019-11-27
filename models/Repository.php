@@ -44,7 +44,7 @@ abstract class Repository implements IModels
             if (!$entity->props[$key]){
                 continue;
             }
-            $params[":{$key}"] = $this->$key;
+            $params[":{$key}"] = $entity->$key;
             $columns[] = "$key = :{$key}";
 
             $entity->props[$key] = false;

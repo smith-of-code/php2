@@ -6,6 +6,8 @@ namespace app\controllers;
 
 use app\engine\Request;
 use app\models\entities\Users;
+use app\models\repositories\OrdersRepository;
+use app\models\repositories\ProductRepositiry;
 use app\models\repositories\UsersRepository;
 
 class AuthController extends Controller
@@ -25,4 +27,6 @@ class AuthController extends Controller
         header("Location: /");
         exit();
     }
+
+
 }

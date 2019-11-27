@@ -1,0 +1,71 @@
+<div id="order__catalog">
+    {% for item in orders %}
+        <div class="order__item" id="{{ item.id }}">
+            <div class="button approve" data-id="{{ item.id }}" >утвердить</div>
+            <a href="/cart/OpenOrder/?id={{ item.id }}" class="order__desc">
+                <p class="order__text">Заказ от : {{ item.name }}</p>
+                <p class="order__text">Номер телефона : {{ item.phone }}</p>
+                <p class="order__text">Статус заказа <span class="order__status">{{ item.status }}</span></p>
+            </a>
+            <div class="button cancel" data-id="{{ item.id }}" >отказать</div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<script>
+    let approve = document.querySelectorAll('.approve');
+    let cancel = document.querySelectorAll('.cancel');
+
+    approve.forEach((elem)=>{
+        elem.addEventListener('click', (event) =>{
+            let id = event.target.dataset.id;
+            (
+                async () => {
+                    const response = await fetch('/admin/changestatus/', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            status: 'approved',
+                            id: id
+                        })
+                    });
+                    const answer = await response.json();
+                    if (answer.response === 'ok'){
+                        document.getElementById(id).querySelector('.order__status').innerHTML = 'approved';
+                    }
+
+                }
+            )();
+        });
+        }
+    );
+   cancel.forEach((elem)=>{
+       elem.addEventListener('click', (event) =>{
+           let id = event.target.dataset.id;
+           (
+               async () => {
+                   const response = await fetch('/admin/changestatus/', {
+                       method: 'POST',
+                       headers: new Headers({
+                           'Content-Type': 'application/json'
+                       }),
+                       body: JSON.stringify({
+                           status: 'cancel',
+                           id: id
+                       })
+                   });
+                   const answer = await response.json();
+                   if (answer.response === 'ok'){
+                       document.getElementById(id).querySelector('.order__status').innerHTML = 'cancel';
+                   }
+
+               }
+           )();
+       });
+   })
+
+
+</script>
